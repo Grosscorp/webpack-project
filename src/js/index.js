@@ -1,2 +1,8 @@
-import '../scss/style.scss';
-import './main.js';
+
+
+
+
+
+
+
+simport '../scss/style.scss';

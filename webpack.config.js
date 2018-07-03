@@ -3,12 +3,31 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const WebpackMd5Hash = require("webpack-md5-hash");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
-  entry: { main: './src/js/index.js' },
+  entry: {
+    main: './src/js/index.js',
+    vendors: ['./src/js/vendors/fontawesome.js', './src/js/vendors/materialize.js']
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'js/[name].[chunkhash].js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      automaticNameDelimiter: '-',
+    },
+    minimizer: [
+    new UglifyJsPlugin({
+      uglifyOptions: {
+        output: {
+          comments: false
+        },
+      }
+    })
+    ]
   },
   devServer: {
     contentBase: './dist',
@@ -103,7 +122,6 @@ const config = {
     filename: 'css/style.[contenthash].css',
   }),
   new HtmlWebpackPlugin({
-    inject: false,
     template: './src/index.html',
     filename: 'index.html'
   }),
@@ -119,7 +137,7 @@ config.devtool = development
                : false;
 
 development ? config.module.rules[1].use[1].options.minimize = false
-            : config.module.rules[1].use[1].options.minimize = true;
+            : config.module.rules[1].use[1].options.minimize = {discardComments: {removeAll: true}};
 
 development && config.module.rules[2].use.splice(1,1);
 
