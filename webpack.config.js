@@ -8,7 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   entry: {
     main: './src/js/index.js',
-    vendors: ['./src/js/vendors/fontawesome.js', './src/js/vendors/materialize.js']
+    vendors: ['./src/js/vendors/vendors.js']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,7 +17,7 @@ const config = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      automaticNameDelimiter: '-',
+      name: 'commons'
     },
     minimizer: [
     new UglifyJsPlugin({
