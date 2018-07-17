@@ -1,5 +1,5 @@
 const config = {
-plugins: {
+  plugins: {
     'autoprefixer': {},
     "css-mqpacker": {},
   }
