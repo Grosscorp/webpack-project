@@ -8,7 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   entry: {
     main: './src/js/index.js',
-    vendors: ['./src/js/vendors/vendors.js']
+    // vendors: ['./src/js/vendors/vendors.js']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,7 +17,7 @@ const config = {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      name: 'commons'
+      name: 'common'
     },
     minimizer: [
       new UglifyJsPlugin({
@@ -120,6 +120,7 @@ const config = {
     new CleanWebpackPlugin('dist', {}),
     new MiniCssExtractPlugin({
       filename: 'css/style.[contenthash].css',
+      chunkFilename: 'css/common.[contenthash].css'
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
