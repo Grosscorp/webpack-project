@@ -1,7 +1,9 @@
+const sortCSSmq = require('sort-css-media-queries');
+
 const config = {
   plugins: {
     'autoprefixer': {},
-    "css-mqpacker": {},
+    'css-mqpacker': {sort: sortCSSmq},
   }
 };
 
