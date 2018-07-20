@@ -38,4 +38,4 @@ const settings = {
   tab: '  ',
 };
 
-smartgrid('./src/scss', settings);
+smartgrid('./src/scss/general', settings);
